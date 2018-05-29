@@ -2,4 +2,4 @@ line-bot-sdk
 flask
 requests
 googlemaps
-numpy as np
+numpy

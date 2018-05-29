@@ -46,13 +46,15 @@ def callback():
 
     return 'OK'
 
-loc_dis_min = 1000
-device_id_min = ''
-pm25_min = 0
+
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     
+    loc_dis_min = 1000
+    device_id_min = ''
+    pm25_min = 0
+
     user_loc = event.message.text
     gecode_result = gmaps.geocode(user_loc)
     #the [lat, lon] of user_loc

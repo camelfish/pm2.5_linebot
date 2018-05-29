@@ -64,7 +64,12 @@ def handle_message(event):
         #Euclidean Distance between two location
         loc_dis=np.sqrt(np.sum(np.square(user_loc_abs-device_loc_abs)))
 
-        if loc_dis < loc_dis_min:
+        if loc_dis_min == 1000:
+            loc_dis_min = loc_dis
+            device_id_min = i['device_id']
+            pm25_min = i['s_d0']
+        
+        elif loc_dis < loc_dis_min:
             loc_dis_min = loc_dis
             device_id_min = i['device_id']
             pm25_min = i['s_d0']

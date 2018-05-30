@@ -77,20 +77,28 @@ def handle_message(event):
             pm25_min = i['s_d0']
 
     #判別空汙等級        
-    if pm25_min <= 50:
-        pm_level = '良好'
-    elif pm25_min >= 51 & pm25_min <= 100:
-        pm_level = '普通'
-    elif pm25_min >= 101 & pm25_min <= 150:
-        pm_level = '對敏感族群不健康'
-    elif pm25_min >= 151 & pm25_min <= 200:
-        pm_level = '對所有族群不健康'
-    elif pm25_min >= 201 & pm25_min <= 300:
-        pm_level = '非常不健康'
-    elif pm25_min >= 301 & pm25_min <= 500:
-        pm_level = '危害'
+    if pm25_min <= 11:
+        pm_level = '第一等級'
+    elif pm25_min >= 12 & pm25_min <= 23:
+        pm_level = '第二等級'
+    elif pm25_min >= 24 & pm25_min <= 35:
+        pm_level = '第三等級'
+    elif pm25_min >= 36 & pm25_min <= 41:
+        pm_level = '第四等級'
+    elif pm25_min >= 42 & pm25_min <= 47:
+        pm_level = '第五等級'
+    elif pm25_min >= 48 & pm25_min <= 53:
+        pm_level = '第六等級'
+    elif pm25_min >= 54 & pm25_min <= 58:
+        pm_level = '第七等級'
+    elif pm25_min >= 59 & pm25_min <= 64:
+        pm_level = '第八等級'
+    elif pm25_min >= 65 & pm25_min <= 70:
+        pm_level = '第九等級'
+    elif pm25_min >= 71:
+        pm_level = '第十等級'
 
-    reply_mes = '距離' +user_loc+ '最近的pm2.5是' +str(pm25_min)+ '。\npm2.5的等級屬於' +pm_level
+    reply_mes = '距離' +user_loc+ '最近的pm2.5是' +str(pm25_min)+ '。\n等級:' +pm_level+ '\n貼心小建議:'
 
     output_mes = TextSendMessage(text=reply_mes)
 

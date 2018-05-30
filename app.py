@@ -76,7 +76,21 @@ def handle_message(event):
             device_id_min = i['device_id']
             pm25_min = i['s_d0']
 
-    reply_mes = '距離' +user_loc+ '最近的pm2.5是' +str(pm25_min)
+    #判別空汙等級        
+    if pm25_min <= 50:
+        pm_level = '良好'
+    elif pm25_min >= 51 & pm25_min <= 100:
+        pm_level = '普通'
+    elif pm25_min >= 101 & pm25_min <= 150:
+        pm_level = '對敏感族群不健康'
+    elif pm25_min >= 151 & pm25_min <= 200:
+        pm_level = '對所有族群不健康'
+    elif pm25_min >= 201 & pm25_min <= 300:
+        pm_level = '非常不健康'
+    elif pm25_min >= 301 & pm25_min <= 500:
+        pm_level = '危害'
+
+    reply_mes = '距離' +user_loc+ '最近的pm2.5是' +str(pm25_min)+ '。\npm2.5的等級屬於' +pm_level
 
     output_mes = TextSendMessage(text=reply_mes)
 

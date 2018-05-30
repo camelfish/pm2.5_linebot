@@ -108,7 +108,7 @@ def handle_message(event):
         pm_level = '第十等級'
         pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應減少體力消耗，特別是減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.具有氣喘的人可能需增加使用吸入劑的頻率。'
 
-    reply_mes = '距離' +user_loc+ '最近的pm2.5是' +str(pm25_min)+ '。\n等級:' +pm_level+ '\n貼心小建議:' +pm_advice
+    reply_mes = '◆距離' +user_loc+ '最近的pm2.5是' +str(pm25_min)+ '。\n◆等級:' +pm_level+ '\n◆貼心小建議:' +pm_advice
 
     output_mes = TextSendMessage(text=reply_mes)
 

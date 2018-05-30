@@ -79,21 +79,21 @@ def handle_message(event):
     #判別空汙等級        
     if pm25_min <= 11:
         pm_level = '第一等級'
-    elif pm25_min >= 12 & pm25_min <= 23:
+    elif 12 <= pm25_min <= 23:
         pm_level = '第二等級'
-    elif pm25_min >= 24 & pm25_min <= 35:
+    elif 24 <= pm25_min <= 35:
         pm_level = '第三等級'
-    elif pm25_min >= 36 & pm25_min <= 41:
+    elif 36 <= pm25_min <= 41:
         pm_level = '第四等級'
-    elif pm25_min >= 42 & pm25_min <= 47:
+    elif 42 <= pm25_min <= 47:
         pm_level = '第五等級'
-    elif pm25_min >= 48 & pm25_min <= 53:
+    elif 48 <= pm25_min <= 53:
         pm_level = '第六等級'
-    elif pm25_min >= 54 & pm25_min <= 58:
+    elif 54 <= pm25_min <= 58:
         pm_level = '第七等級'
-    elif pm25_min >= 59 & pm25_min <= 64:
+    elif 59 <= pm25_min <= 64:
         pm_level = '第八等級'
-    elif pm25_min >= 65 & pm25_min <= 70:
+    elif 65 <= pm25_min <= 70:
         pm_level = '第九等級'
     elif pm25_min >= 71:
         pm_level = '第十等級'

@@ -16,5 +16,5 @@ https://www.youtube.com/watch?v=8fpl60Q4QWE
 
 ## Line Bot QRcode
 
-![image](https://github.com/camelfish/pm2.5_linebot/blob/master/QR_code.PNG)
+![image](https://github.com/camelfish/pm2.5_linebot/blob/master/QR_code.png)
 

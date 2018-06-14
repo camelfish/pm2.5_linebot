@@ -111,66 +111,65 @@ def handle_message(event):
     #滾軸
     Carousel_template = CarouselTemplate(
         alt_text='距離最近的五個測站',
+
+        columns=[
+            CarouselColumn(
+                thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
+                title = nearest_loc[0],
+                text = '距離最近的測站資料',
+                actions=[
+                    URITemplateAction(
+                        label='pm2.5為'+str(loc_dis_min[0][1][0]),
+                        uri='https://pm25.lass-net.org/data/last.php?device_id='+loc_dis_min[0][0]
+                    )
+                ]
+            ),
+            CarouselColumn(
+                thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&size=600x300&key='+static_maps_api_key,
+                title = nearest_loc[1],
+                text = '距離第二的測站資料',
+                actions=[
+                    URITemplateAction(
+                        label='pm2.5為'+str(loc_dis_min[1][1][0]),
+                        uri='https://pm25.lass-net.org/data/last.php?device_id='+loc_dis_min[1][0]
+                    )
+                ]
+            ),
+            CarouselColumn(
+                thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&size=600x300&key='+static_maps_api_key,
+                title = nearest_loc[2],
+                text = '距離第三的測站資料',
+                actions=[
+                    URITemplateAction(
+                        label='pm2.5為'+str(loc_dis_min[2][1][0]),
+                        uri='https://pm25.lass-net.org/data/last.php?device_id='+loc_dis_min[2][0]
+                    )
+                ]
+            ),                    
+            CarouselColumn(
+                thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
+                title = nearest_loc[3],
+                text = '距離第四的測站資料',
+                actions=[
+                    URITemplateAction(
+                        label='pm2.5為'+str(loc_dis_min[3][1][0]),
+                        uri='https://pm25.lass-net.org/data/last.php?device_id='+loc_dis_min[3][0]
+                    )
+                ]
+            ),
+            CarouselColumn(
+                thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[4][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
+                title = nearest_loc[4],
+                text = '距離第四的測站資料',
+                actions=[
+                    URITemplateAction(
+                        label='pm2.5為'+str(loc_dis_min[4][1][0]),
+                        uri='https://pm25.lass-net.org/data/last.php?device_id='+loc_dis_min[4][0]
+                    )
+                ]
+            )
+        ]
         
-        template=CarouselTemplate(
-            columns=[
-                CarouselColumn(
-                    thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
-                    title = nearest_loc[0],
-                    text = '距離最近的測站資料',
-                    actions=[
-                        URITemplateAction(
-                            label='pm2.5為'+str(loc_dis_min[0][1][0]),
-                            uri='https://pm25.lass-net.org/data/last.php?device_id='+loc_dis_min[0][0]
-                        )
-                    ]
-                ),
-                CarouselColumn(
-                    thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&size=600x300&key='+static_maps_api_key,
-                    title = nearest_loc[1],
-                    text = '距離第二的測站資料',
-                    actions=[
-                        URITemplateAction(
-                            label='pm2.5為'+str(loc_dis_min[1][1][0]),
-                            uri='https://pm25.lass-net.org/data/last.php?device_id='+loc_dis_min[1][0]
-                        )
-                    ]
-                ),
-                CarouselColumn(
-                    thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&size=600x300&key='+static_maps_api_key,
-                    title = nearest_loc[2],
-                    text = '距離第三的測站資料',
-                    actions=[
-                        URITemplateAction(
-                            label='pm2.5為'+str(loc_dis_min[2][1][0]),
-                            uri='https://pm25.lass-net.org/data/last.php?device_id='+loc_dis_min[2][0]
-                        )
-                    ]
-                ),                    
-                CarouselColumn(
-                    thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
-                    title = nearest_loc[3],
-                    text = '距離第四的測站資料',
-                    actions=[
-                        URITemplateAction(
-                            label='pm2.5為'+str(loc_dis_min[3][1][0]),
-                            uri='https://pm25.lass-net.org/data/last.php?device_id='+loc_dis_min[3][0]
-                        )
-                    ]
-                ),
-                CarouselColumn(
-                    thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[4][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
-                    title = nearest_loc[4],
-                    text = '距離第四的測站資料',
-                    actions=[
-                        URITemplateAction(
-                            label='pm2.5為'+str(loc_dis_min[4][1][0]),
-                            uri='https://pm25.lass-net.org/data/last.php?device_id='+loc_dis_min[4][0]
-                        )
-                    ]
-                )
-            ]
-        )
     )
     
     line_bot_api.reply_message(event.reply_token,Carousel_template)

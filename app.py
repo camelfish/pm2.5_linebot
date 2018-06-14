@@ -109,8 +109,7 @@ def handle_message(event):
         nearest_loc.append(gecode_result[0]['formatted_address'])
 
     #滾軸
-    Carousel_template = CarouselTemplate(
-        alt_text='距離最近的五個測站',
+    carousel_template = CarouselTemplate(
 
         columns=[
             CarouselColumn(
@@ -172,7 +171,13 @@ def handle_message(event):
         
     )
     
-    line_bot_api.reply_message(event.reply_token,Carousel_template)
+    template_message = TemplateSendMessage(
+            alt_text = '距離最近的五個測站', 
+            template = carousel_template
+    )
+    
+    line_bot_api.reply_message(event.reply_token, template_message)
+    #line_bot_api.reply_message(event.reply_token,Carousel_template)
 
     # buttons_template = TemplateSendMessage(
     #     alt_text='Buttons Template',        

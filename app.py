@@ -108,7 +108,7 @@ def handle_message(event):
         nearest_loc.append(gecode_result[0]['formatted_address'])
 
     #滾軸
-    Carousel_template = TemplateSendMessage(
+    Carousel_template = CarouselTemplate(
         alt_text='距離最近的五個測站',
         
         template=CarouselTemplate(

@@ -7,7 +7,8 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, LocationMessage, TemplateSendMessage,
+    ButtonsTemplate, CarouselTemplate, PostbackTemplateAction, CarouselColumn , URITemplateAction
 )
 import requests
 import googlemaps

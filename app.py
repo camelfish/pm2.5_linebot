@@ -129,7 +129,7 @@ def handle_message(event):
             columns=[
                 CarouselColumn(
                     # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
-                    title = nearest_loc[0][3:23],
+                    title = nearest_loc[0][3:25],
                     text = '距離最近的測站資料',
                     actions=[
                         MessageTemplateAction(

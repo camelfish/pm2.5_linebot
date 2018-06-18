@@ -88,7 +88,7 @@ def handle_message(event):
     carousel_template = CarouselTemplate(
         columns=[
             CarouselColumn(
-                thumbnail_image_url='http://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
+                thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
                 title = nearest_loc[0][3:23],
                 text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
                 actions=[

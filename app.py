@@ -8,7 +8,7 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, LocationMessage, TemplateSendMessage,
-    ButtonsTemplate, CarouselTemplate, PostbackTemplateAction, CarouselColumn, URITemplateAction, MessageTemplateAction, PostbackEvent
+    ButtonsTemplate, CarouselTemplate, PostbackTemplateAction, CarouselColumn, URITemplateAction, MessageTemplateAction
 )
 
 import requests
@@ -27,6 +27,7 @@ handler = WebhookHandler('509073f22655c9158ec62aa059de1a32')
 static_maps_api_key = 'AIzaSyB25oVe3hd7XD-0kG0vWyRKfmIyDAX1YsU'
 gmaps = googlemaps.Client(key=static_maps_api_key)
 #google_map_api = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' +loc+ '&key=AIzaSyB25oVe3hd7XD-0kG0vWyRKfmIyDAX1YsU').json()
+chatbase_api_key = '8724d1e0-8ab2-4b41-998f-2eeabd8cb189'
 
 data_pm = requests.get("https://pm25.lass-net.org/data/last-all-airbox.json").json()
 
@@ -95,6 +96,7 @@ def handle_message(event):
             event.reply_token,
             output_mes)
 
+
     else:
 
         loc_dis_min={}
@@ -128,7 +130,7 @@ def handle_message(event):
         carousel_template = CarouselTemplate(
             columns=[
                 CarouselColumn(
-                    thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
                     title = nearest_loc[0][3:23],
                     text = '距離最近的測站資料',
                     actions=[
@@ -140,7 +142,7 @@ def handle_message(event):
                     ]
                 ),
                 CarouselColumn(
-                    thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&size=600x300&key='+static_maps_api_key,
                     title = nearest_loc[1][3:23],
                     text = '距離第二的測站資料',
                     actions=[
@@ -152,7 +154,7 @@ def handle_message(event):
                     ]
                 ),
                 CarouselColumn(
-                    thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&size=600x300&key='+static_maps_api_key,
                     title = nearest_loc[2][3:23],
                     text = '距離第三的測站資料',
                     actions=[
@@ -164,7 +166,7 @@ def handle_message(event):
                     ]
                 ),                    
                 CarouselColumn(
-                    thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
                     title = nearest_loc[3][3:23],
                     text = '距離第四的測站資料',
                     actions=[
@@ -176,7 +178,7 @@ def handle_message(event):
                     ]
                 ),
                 CarouselColumn(
-                    thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[4][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[4][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
                     title = nearest_loc[4][3:23],
                     text = '距離第四的測站資料',
                     actions=[
@@ -197,6 +199,17 @@ def handle_message(event):
         )
         
         line_bot_api.reply_message(event.reply_token, template_message)
+
+        msg = Message(api_key=chatbase_api_key,
+              type="user",
+              platform="Line",
+              version="1.0",
+              user_id=event.source.user_id,
+              message=event.message.text,
+              intent="LinebotSearchPostion",  
+              not_handled=True,           
+              )            
+        resp = msg.send()
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location_message(event):
@@ -233,10 +246,10 @@ def handle_location_message(event):
                 title = nearest_loc[0][3:23],
                 text = '距離最近的測站資料',
                 actions=[
-                    PostbackTemplateAction(
+                    MessageTemplateAction(
                         label = '貼心小提醒', 
-                        # text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
-                        data='pm2.5為'+str(loc_dis_min[0][1][0]),
+                        text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
+                        # data='postback1'
                     )
                 ]
             ),
@@ -245,10 +258,10 @@ def handle_location_message(event):
                 title = nearest_loc[1][3:23],
                 text = '距離第二的測站資料',
                 actions=[
-                    PostbackTemplateAction(
+                    MessageTemplateAction(
                         label = '貼心小提醒', 
-                        # text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
-                        data='pm2.5為'+str(loc_dis_min[0][1][0]),
+                        text = 'pm2.5為'+str(loc_dis_min[1][1][0]),
+                        # data='postback1'
                     )
                 ]
             ),
@@ -257,10 +270,10 @@ def handle_location_message(event):
                 title = nearest_loc[2][3:23],
                 text = '距離第三的測站資料',
                 actions=[
-                    PostbackTemplateAction(
+                    MessageTemplateAction(
                         label = '貼心小提醒', 
-                        # text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
-                        data='pm2.5為'+str(loc_dis_min[0][1][0]),
+                        text = 'pm2.5為'+str(loc_dis_min[2][1][0]),
+                        # data='postback1'
                     )
                 ]
             ),                    
@@ -269,10 +282,10 @@ def handle_location_message(event):
                 title = nearest_loc[3][3:23],
                 text = '距離第四的測站資料',
                 actions=[
-                    PostbackTemplateAction(
+                    MessageTemplateAction(
                         label = '貼心小提醒', 
-                        # text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
-                        data='pm2.5為'+str(loc_dis_min[0][1][0]),
+                        text = 'pm2.5為'+str(loc_dis_min[3][1][0]),
+                        # data='postback1'
                     )
                 ]
             ),
@@ -281,10 +294,10 @@ def handle_location_message(event):
                 title = nearest_loc[4][3:23],
                 text = '距離第四的測站資料',
                 actions=[
-                    PostbackTemplateAction(
+                    MessageTemplateAction(
                         label = '貼心小提醒', 
-                        # text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
-                        data='pm2.5為'+str(loc_dis_min[0][1][0]),
+                        text = 'pm2.5為'+str(loc_dis_min[4][1][0]),
+                        # data='postback1'
                     )
                 ]
             )
@@ -299,50 +312,16 @@ def handle_location_message(event):
     
     line_bot_api.reply_message(event.reply_token, template_message)
 
-
-@handler.add(PostbackEvent)
-def handle_postback(event):
-    if event.postback.data[0:6] == 'pm2.5為':
-            #判別空汙等級        
-        if float(event.postback.data[7:]) <= 11:
-            pm_level = '第一等級'
-            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
-        elif 12 <= float(event.postback.data[7:]) <= 23:
-            pm_level = '第二等級'
-            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
-        elif 24 <= float(event.postback.data[7:]) <= 35:
-            pm_level = '第三等級'
-            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
-        elif 36 <= float(event.postback.data[7:]) <= 41:
-            pm_level = '第四等級'
-            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
-        elif 42 <= float(event.postback.data[7:]) <= 47:
-            pm_level = '第五等級'
-            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
-        elif 48 <= float(event.postback.data[7:]) <= 53:
-            pm_level = '第六等級'
-            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
-        elif 54 <= float(event.postback.data[7:]) <= 58:
-            pm_level = '第七等級'
-            pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
-        elif 59 <= float(event.postback.data[7:]) <= 64:
-            pm_level = '第八等級'
-            pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
-        elif 65 <= float(event.postback.data[7:]) <= 70:
-            pm_level = '第九等級'
-            pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
-        elif float(event.postback.data[7:]) >= 71:
-            pm_level = '第十等級'
-            pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應減少體力消耗，特別是減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.具有氣喘的人可能需增加使用吸入劑的頻率。'
-
-        reply_mes = '◆等級:' +pm_level+ '\n◆貼心小建議:' +pm_advice
-
-        output_mes = TextSendMessage(text=reply_mes)
-
-        line_bot_api.reply_message(
-            event.reply_token,
-            output_mes)
-
+    msg = Message(api_key=chatbase_api_key,
+              type="user",
+              platform="Line",
+              version="1.0",
+              user_id=event.source.user_id,
+              message=event.message.address,
+              intent="LinebotSearchPostion",  
+              not_handled=True,           
+              )            
+    resp = msg.send()
 
 
 if __name__ == "__main__":

@@ -124,7 +124,7 @@ def handle_message(event):
             columns=[
                 CarouselColumn(
                     # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
-                    title = nearest_loc[0],
+                    title = nearest_loc[0][4:24],
                     text = '距離最近的測站資料',
                     actions=[
                         PostbackTemplateAction(
@@ -136,7 +136,7 @@ def handle_message(event):
                 ),
                 CarouselColumn(
                     # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&size=600x300&key='+static_maps_api_key,
-                    title = nearest_loc[1],
+                    title = nearest_loc[1][4:24],
                     text = '距離第二的測站資料',
                     actions=[
                         PostbackTemplateAction(
@@ -148,7 +148,7 @@ def handle_message(event):
                 ),
                 CarouselColumn(
                     # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&size=600x300&key='+static_maps_api_key,
-                    title = nearest_loc[2],
+                    title = nearest_loc[2][4:24],
                     text = '距離第三的測站資料',
                     actions=[
                         PostbackTemplateAction(
@@ -160,7 +160,7 @@ def handle_message(event):
                 ),                    
                 CarouselColumn(
                     # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
-                    title = nearest_loc[3],
+                    title = nearest_loc[3][4:24],
                     text = '距離第四的測站資料',
                     actions=[
                         PostbackTemplateAction(
@@ -172,7 +172,7 @@ def handle_message(event):
                 ),
                 CarouselColumn(
                     # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[4][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
-                    title = nearest_loc[4],
+                    title = nearest_loc[4][4:24],
                     text = '距離第四的測站資料',
                     actions=[
                         PostbackTemplateAction(

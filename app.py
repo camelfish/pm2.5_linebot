@@ -187,8 +187,8 @@ def handle_message(event):
         )
 
         template_message = TemplateSendMessage(
-                alt_text = '距離最近的五個測站', 
-                template = carousel_template
+            alt_text = '距離最近的五個測站', 
+            template = carousel_template
         )
         
         line_bot_api.reply_message(event.reply_token, template_message)

@@ -122,6 +122,8 @@ def handle_message(event):
         for i in nearest_loc:
             print(i)
 
+        print(loc_dis_min[0][1][0])
+
         #滾軸
         carousel_template = CarouselTemplate(
             columns=[

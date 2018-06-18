@@ -56,7 +56,7 @@ def handle_message(event):
     
     test = event.message.text
     print(test)
-    if test[0:6] == "pm2.5為"：
+    if (test[0:6] == "pm2.5為")：
             #判別空汙等級        
         if event.message.text[7:] <= 11:
             pm_level = '第一等級'

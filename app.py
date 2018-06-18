@@ -51,7 +51,7 @@ def callback():
 
 
 
-@handler.add(MessageEvent, message=TextMessage, LocationMessage)
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     
     if str(event.message.text[0:6]) == 'pm2.5為':

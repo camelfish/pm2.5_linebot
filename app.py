@@ -8,7 +8,7 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     TemplateSendMessage, ButtonsTemplate,
-    PostbackAction, MessageAction,
+    MessageAction,
     URIAction, DatetimePickerAction,
     ConfirmTemplate, CarouselTemplate, CarouselColumn,
     ImageCarouselTemplate, ImageCarouselColumn

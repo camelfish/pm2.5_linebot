@@ -3,4 +3,4 @@ flask
 requests
 googlemaps
 numpy
-chatbase
+git+git://github.com/google/chatbase-python.git

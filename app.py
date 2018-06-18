@@ -132,7 +132,7 @@ def handle_message(event):
                     title = nearest_loc[0][4:24],
                     text = '距離最近的測站資料',
                     actions=[
-                        PostbackTemplateAction(
+                        MessageAction(
                             label = '貼心小提醒', 
                             text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
                             # data='postback1'
@@ -144,7 +144,7 @@ def handle_message(event):
                     title = nearest_loc[1][4:24],
                     text = '距離第二的測站資料',
                     actions=[
-                        PostbackTemplateAction(
+                        MessageAction(
                             label = '貼心小提醒', 
                             text = 'pm2.5為'+str(loc_dis_min[1][1][0]),
                             # data='postback1'
@@ -156,7 +156,7 @@ def handle_message(event):
                     title = nearest_loc[2][4:24],
                     text = '距離第三的測站資料',
                     actions=[
-                        PostbackTemplateAction(
+                        MessageAction(
                             label = '貼心小提醒', 
                             text = 'pm2.5為'+str(loc_dis_min[2][1][0]),
                             # data='postback1'
@@ -168,7 +168,7 @@ def handle_message(event):
                     title = nearest_loc[3][4:24],
                     text = '距離第四的測站資料',
                     actions=[
-                        PostbackTemplateAction(
+                        MessageAction(
                             label = '貼心小提醒', 
                             text = 'pm2.5為'+str(loc_dis_min[3][1][0]),
                             # data='postback1'
@@ -180,7 +180,7 @@ def handle_message(event):
                     title = nearest_loc[4][4:24],
                     text = '距離第四的測站資料',
                     actions=[
-                        PostbackTemplateAction(
+                        MessageAction(
                             label = '貼心小提醒', 
                             text = 'pm2.5為'+str(loc_dis_min[4][1][0]),
                             # data='postback1'

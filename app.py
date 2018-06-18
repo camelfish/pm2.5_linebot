@@ -303,49 +303,45 @@ def handle_location_message(event):
 @handler.add(PostbackEvent)
 def handle_postback(event):
     if event.postback.data[0:6] == 'pm2.5為':
+            #判別空汙等級        
+        if float(event.postback.data[7:]) <= 11:
+            pm_level = '第一等級'
+            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
+        elif 12 <= float(event.postback.data[7:]) <= 23:
+            pm_level = '第二等級'
+            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
+        elif 24 <= float(event.postback.data[7:]) <= 35:
+            pm_level = '第三等級'
+            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
+        elif 36 <= float(event.postback.data[7:]) <= 41:
+            pm_level = '第四等級'
+            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
+        elif 42 <= float(event.postback.data[7:]) <= 47:
+            pm_level = '第五等級'
+            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
+        elif 48 <= float(event.postback.data[7:]) <= 53:
+            pm_level = '第六等級'
+            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
+        elif 54 <= float(event.postback.data[7:]) <= 58:
+            pm_level = '第七等級'
+            pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
+        elif 59 <= float(event.postback.data[7:]) <= 64:
+            pm_level = '第八等級'
+            pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
+        elif 65 <= float(event.postback.data[7:]) <= 70:
+            pm_level = '第九等級'
+            pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
+        elif float(event.postback.data[7:]) >= 71:
+            pm_level = '第十等級'
+            pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應減少體力消耗，特別是減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.具有氣喘的人可能需增加使用吸入劑的頻率。'
+
+        reply_mes = '◆等級:' +pm_level+ '\n◆貼心小建議:' +pm_advice
+
+        output_mes = TextSendMessage(text=reply_mes)
+
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text='pong'))
-
-        #     if str(event.message.text[0:6]) == 'pm2.5為':
-        #     #判別空汙等級        
-        # if float(event.message.text[7:]) <= 11:
-        #     pm_level = '第一等級'
-        #     pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
-        # elif 12 <= float(event.message.text[7:]) <= 23:
-        #     pm_level = '第二等級'
-        #     pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
-        # elif 24 <= float(event.message.text[7:]) <= 35:
-        #     pm_level = '第三等級'
-        #     pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
-        # elif 36 <= float(event.message.text[7:]) <= 41:
-        #     pm_level = '第四等級'
-        #     pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
-        # elif 42 <= float(event.message.text[7:]) <= 47:
-        #     pm_level = '第五等級'
-        #     pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
-        # elif 48 <= float(event.message.text[7:]) <= 53:
-        #     pm_level = '第六等級'
-        #     pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
-        # elif 54 <= float(event.message.text[7:]) <= 58:
-        #     pm_level = '第七等級'
-        #     pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
-        # elif 59 <= float(event.message.text[7:]) <= 64:
-        #     pm_level = '第八等級'
-        #     pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
-        # elif 65 <= float(event.message.text[7:]) <= 70:
-        #     pm_level = '第九等級'
-        #     pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
-        # elif float(event.message.text[7:]) >= 71:
-        #     pm_level = '第十等級'
-        #     pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應減少體力消耗，特別是減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.具有氣喘的人可能需增加使用吸入劑的頻率。'
-
-        # reply_mes = '◆等級:' +pm_level+ '\n◆貼心小建議:' +pm_advice
-
-        # output_mes = TextSendMessage(text=reply_mes)
-
-        # line_bot_api.reply_message(
-        #     event.reply_token,
-        #     output_mes)
+            event.reply_token,
+            output_mes)
 
 
 

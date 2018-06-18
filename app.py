@@ -54,7 +54,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     
-    if event.message.text[0] == 'p'：
+    if event.message.text[0:6] == "pm2.5為"：
             #判別空汙等級        
         if event.message.text[7:] <= 11:
             pm_level = '第一等級'

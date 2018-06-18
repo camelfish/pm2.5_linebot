@@ -197,7 +197,108 @@ def handle_message(event):
         )
         
         line_bot_api.reply_message(event.reply_token, template_message)
+
+@handler.add(MessageEvent, message=LocationMessage)
+def handle_location_message(event):
+
+    # Geocoding an address
+    loc_dis_min={}
+    nearest_loc = []
+
+    print(event.message.latitude)
+    print(event.message.longitude)
+
+    user_loc_abs = np.array([event.message.latitude, event.message.longitude])
+
+    for i in data_pm['feeds']:
+
+        device_loc_abs = np.array([i['gps_lat'],i['gps_lon']])
+
+        #Euclidean Distance between two location
+        loc_dis=np.sqrt(np.sum(np.square(user_loc_abs-device_loc_abs)))
+        loc_dis_min[i['device_id']] = [i['s_d0'], loc_dis, i['gps_lat'], i['gps_lon']]
+
+    loc_dis_min = sorted(loc_dis_min.items(), key=lambda e: e[1][1])
+
     
+    for i in range(5):
+        gecode_result = gmaps.reverse_geocode((loc_dis_min[i][1][2], loc_dis_min[i][1][3]), language='zh-TW')
+        nearest_loc.append(gecode_result[0]['formatted_address'])
+
+    #滾軸
+    carousel_template = CarouselTemplate(
+        columns=[
+            CarouselColumn(
+                # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
+                title = nearest_loc[0][3:23],
+                text = '距離最近的測站資料',
+                actions=[
+                    MessageTemplateAction(
+                        label = '貼心小提醒', 
+                        text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
+                        # data='postback1'
+                    )
+                ]
+            ),
+            CarouselColumn(
+                # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&size=600x300&key='+static_maps_api_key,
+                title = nearest_loc[1][3:23],
+                text = '距離第二的測站資料',
+                actions=[
+                    MessageTemplateAction(
+                        label = '貼心小提醒', 
+                        text = 'pm2.5為'+str(loc_dis_min[1][1][0]),
+                        # data='postback1'
+                    )
+                ]
+            ),
+            CarouselColumn(
+                # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&size=600x300&key='+static_maps_api_key,
+                title = nearest_loc[2][3:23],
+                text = '距離第三的測站資料',
+                actions=[
+                    MessageTemplateAction(
+                        label = '貼心小提醒', 
+                        text = 'pm2.5為'+str(loc_dis_min[2][1][0]),
+                        # data='postback1'
+                    )
+                ]
+            ),                    
+            CarouselColumn(
+                # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
+                title = nearest_loc[3][3:23],
+                text = '距離第四的測站資料',
+                actions=[
+                    MessageTemplateAction(
+                        label = '貼心小提醒', 
+                        text = 'pm2.5為'+str(loc_dis_min[3][1][0]),
+                        # data='postback1'
+                    )
+                ]
+            ),
+            CarouselColumn(
+                # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[4][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
+                title = nearest_loc[4][3:23],
+                text = '距離第四的測站資料',
+                actions=[
+                    MessageTemplateAction(
+                        label = '貼心小提醒', 
+                        text = 'pm2.5為'+str(loc_dis_min[4][1][0]),
+                        # data='postback1'
+                    )
+                ]
+            )
+        ]
+        
+    )
+
+    template_message = TemplateSendMessage(
+        alt_text = '距離最近的五個測站', 
+        template = carousel_template
+    )
+    
+    line_bot_api.reply_message(event.reply_token, template_message)
+
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

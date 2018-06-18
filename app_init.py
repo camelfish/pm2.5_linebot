@@ -7,8 +7,10 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, LocationMessage, TemplateSendMessage,
+    ButtonsTemplate, CarouselTemplate, PostbackTemplateAction, CarouselColumn, URITemplateAction, MessageTemplateAction
 )
+
 import requests
 import googlemaps
 import numpy as np
@@ -22,7 +24,8 @@ line_bot_api = LineBotApi('+6Vcg6zNfbqzQTPZF3hx8svapB2CFA1QyTrObKNMMdcOS0WUsB7KN
 # Channel Secret
 handler = WebhookHandler('509073f22655c9158ec62aa059de1a32')
 #GoogleMap key
-gmaps = googlemaps.Client(key='AIzaSyB25oVe3hd7XD-0kG0vWyRKfmIyDAX1YsU')
+static_maps_api_key = 'AIzaSyB25oVe3hd7XD-0kG0vWyRKfmIyDAX1YsU'
+gmaps = googlemaps.Client(key=static_maps_api_key)
 #google_map_api = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' +loc+ '&key=AIzaSyB25oVe3hd7XD-0kG0vWyRKfmIyDAX1YsU').json()
 
 data_pm = requests.get("https://pm25.lass-net.org/data/last-all-airbox.json").json()
@@ -51,70 +54,150 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     
-    loc_dis_min = 1000
-    device_id_min = ''
-    pm25_min = 0
+    if str(event.message.text[0:6]) == 'pm2.5為':
+            #判別空汙等級        
+        if float(event.message.text[7:]) <= 11:
+            pm_level = '第一等級'
+            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
+        elif 12 <= float(event.message.text[7:]) <= 23:
+            pm_level = '第二等級'
+            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
+        elif 24 <= float(event.message.text[7:]) <= 35:
+            pm_level = '第三等級'
+            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
+        elif 36 <= float(event.message.text[7:]) <= 41:
+            pm_level = '第四等級'
+            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
+        elif 42 <= float(event.message.text[7:]) <= 47:
+            pm_level = '第五等級'
+            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
+        elif 48 <= float(event.message.text[7:]) <= 53:
+            pm_level = '第六等級'
+            pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
+        elif 54 <= float(event.message.text[7:]) <= 58:
+            pm_level = '第七等級'
+            pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
+        elif 59 <= float(event.message.text[7:]) <= 64:
+            pm_level = '第八等級'
+            pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
+        elif 65 <= float(event.message.text[7:]) <= 70:
+            pm_level = '第九等級'
+            pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
+        elif float(event.message.text[7:]) >= 71:
+            pm_level = '第十等級'
+            pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應減少體力消耗，特別是減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.具有氣喘的人可能需增加使用吸入劑的頻率。'
 
-    user_loc = event.message.text
-    gecode_result = gmaps.geocode(user_loc)
-    #the [lat, lon] of user_loc
-    user_loc_abs = np.array(list(gecode_result[0]['geometry']['location'].values()))
+        reply_mes = '◆等級:' +pm_level+ '\n◆貼心小建議:' +pm_advice
 
-    for i in data_pm['feeds']:
-        device_loc_abs = np.array([i['gps_lat'],i['gps_lon']])
+        output_mes = TextSendMessage(text=reply_mes)
 
-        #Euclidean Distance between two location
-        loc_dis=np.sqrt(np.sum(np.square(user_loc_abs-device_loc_abs)))
+        line_bot_api.reply_message(
+            event.reply_token,
+            output_mes)
 
-        if loc_dis_min == 1000:
-            loc_dis_min = loc_dis
-            device_id_min = i['device_id']
-            pm25_min = i['s_d0']
+    else:
+
+        loc_dis_min={}
+        nearest_loc = []
+
+        user_loc = event.message.text
+        gecode_result = gmaps.geocode(user_loc)
+        user_loc_abs = np.array(list(gecode_result[0]['geometry']['location'].values()))
+
+        for i in data_pm['feeds']:
+
+            device_loc_abs = np.array([i['gps_lat'],i['gps_lon']])
+
+            #Euclidean Distance between two location
+            loc_dis=np.sqrt(np.sum(np.square(user_loc_abs-device_loc_abs)))
+            loc_dis_min[i['device_id']] = [i['s_d0'], loc_dis, i['gps_lat'], i['gps_lon']]
+
+        loc_dis_min = sorted(loc_dis_min.items(), key=lambda e: e[1][1])
+
         
-        elif loc_dis < loc_dis_min:
-            loc_dis_min = loc_dis
-            device_id_min = i['device_id']
-            pm25_min = i['s_d0']
+        for i in range(5):
+            gecode_result = gmaps.reverse_geocode((loc_dis_min[i][1][2], loc_dis_min[i][1][3]), language='zh-TW')
+            nearest_loc.append(gecode_result[0]['formatted_address'])
 
-    #判別空汙等級        
-    if pm25_min <= 11:
-        pm_level = '第一等級'
-        pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
-    elif 12 <= pm25_min <= 23:
-        pm_level = '第二等級'
-        pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
-    elif 24 <= pm25_min <= 35:
-        pm_level = '第三等級'
-        pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
-    elif 36 <= pm25_min <= 41:
-        pm_level = '第四等級'
-        pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
-    elif 42 <= pm25_min <= 47:
-        pm_level = '第五等級'
-        pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
-    elif 48 <= pm25_min <= 53:
-        pm_level = '第六等級'
-        pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
-    elif 54 <= pm25_min <= 58:
-        pm_level = '第七等級'
-        pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
-    elif 59 <= pm25_min <= 64:
-        pm_level = '第八等級'
-        pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
-    elif 65 <= pm25_min <= 70:
-        pm_level = '第九等級'
-        pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
-    elif pm25_min >= 71:
-        pm_level = '第十等級'
-        pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應減少體力消耗，特別是減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.具有氣喘的人可能需增加使用吸入劑的頻率。'
+        for i in nearest_loc:
+            print(i)
 
-    reply_mes = '◆距離' +user_loc+ '最近的pm2.5是' +str(pm25_min)+ '。\n◆等級:' +pm_level+ '\n◆貼心小建議:' +pm_advice
+        print(loc_dis_min[0][1][0])
 
-    output_mes = TextSendMessage(text=reply_mes)
+        #滾軸
+        carousel_template = CarouselTemplate(
+            columns=[
+                CarouselColumn(
+                    # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    title = nearest_loc[0][3:23],
+                    text = '距離最近的測站資料',
+                    actions=[
+                        MessageTemplateAction(
+                            label = '貼心小提醒', 
+                            text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
+                            # data='postback1'
+                        )
+                    ]
+                ),
+                CarouselColumn(
+                    # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    title = nearest_loc[1][3:23],
+                    text = '距離第二的測站資料',
+                    actions=[
+                        MessageTemplateAction(
+                            label = '貼心小提醒', 
+                            text = 'pm2.5為'+str(loc_dis_min[1][1][0]),
+                            # data='postback1'
+                        )
+                    ]
+                ),
+                CarouselColumn(
+                    # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    title = nearest_loc[2][3:23],
+                    text = '距離第三的測站資料',
+                    actions=[
+                        MessageTemplateAction(
+                            label = '貼心小提醒', 
+                            text = 'pm2.5為'+str(loc_dis_min[2][1][0]),
+                            # data='postback1'
+                        )
+                    ]
+                ),                    
+                CarouselColumn(
+                    # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    title = nearest_loc[3][3:23],
+                    text = '距離第四的測站資料',
+                    actions=[
+                        MessageTemplateAction(
+                            label = '貼心小提醒', 
+                            text = 'pm2.5為'+str(loc_dis_min[3][1][0]),
+                            # data='postback1'
+                        )
+                    ]
+                ),
+                CarouselColumn(
+                    # thumbnail_image_url='http://maps.google.com/maps/api/staticmap?center='+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[4][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    title = nearest_loc[4][3:23],
+                    text = '距離第四的測站資料',
+                    actions=[
+                        MessageTemplateAction(
+                            label = '貼心小提醒', 
+                            text = 'pm2.5為'+str(loc_dis_min[4][1][0]),
+                            # data='postback1'
+                        )
+                    ]
+                )
+            ]
+            
+        )
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        output_mes)
+        template_message = TemplateSendMessage(
+            alt_text = '距離最近的五個測站', 
+            template = carousel_template
+        )
+        
+        line_bot_api.reply_message(event.reply_token, template_message)
+    
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

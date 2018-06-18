@@ -54,38 +54,36 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     
-    test = event.message.text
-    print(test)
-    if (test[0:6] == "pm2.5為")：
+    if event.message.text[0:6] == 'pm2.5為'：
             #判別空汙等級        
-        if event.message.text[7:] <= 11:
+        if float(event.message.text[7:]) <= 11:
             pm_level = '第一等級'
             pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
-        elif 12 <= event.message.text[7:] <= 23:
+        elif 12 <= float(event.message.text[7:]) <= 23:
             pm_level = '第二等級'
             pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
-        elif 24 <= event.message.text[7:] <= 35:
+        elif 24 <= float(event.message.text[7:]) <= 35:
             pm_level = '第三等級'
             pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)正常戶外活動。'
-        elif 36 <= event.message.text[7:] <= 41:
+        elif 36 <= float(event.message.text[7:]) <= 41:
             pm_level = '第四等級'
             pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
-        elif 42 <= event.message.text[7:] <= 47:
+        elif 42 <= float(event.message.text[7:]) <= 47:
             pm_level = '第五等級'
             pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
-        elif 48 <= event.message.text[7:] <= 53:
+        elif 48 <= float(event.message.text[7:]) <= 53:
             pm_level = '第六等級'
             pm_advice = '(一般民眾)正常戶外活動。\n(敏感性族群)有心臟、呼吸道及心血管疾病的成人與孩童感受到癥狀時，應考慮減少體力消耗，特別是減少戶外活動。'
-        elif 54 <= event.message.text[7:] <= 58:
+        elif 54 <= float(event.message.text[7:]) <= 58:
             pm_level = '第七等級'
             pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
-        elif 59 <= event.message.text[7:] <= 64:
+        elif 59 <= float(event.message.text[7:]) <= 64:
             pm_level = '第八等級'
             pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
-        elif 65 <= event.message.text[7:] <= 70:
+        elif 65 <= float(event.message.text[7:]) <= 70:
             pm_level = '第九等級'
             pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.老年人應減少體力消耗。\n3.具有氣喘的人可能需增加使用吸入劑的頻率。'
-        elif event.message.text[7:] >= 71:
+        elif float(event.message.text[7:]) >= 71:
             pm_level = '第十等級'
             pm_advice = '(一般民眾)任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應減少體力消耗，特別是減少戶外活動。\n(敏感性族群)1.有心臟、呼吸道及心血管疾病的成人與孩童，應減少體力消耗，特別是減少戶外活動。\n2.具有氣喘的人可能需增加使用吸入劑的頻率。'
 

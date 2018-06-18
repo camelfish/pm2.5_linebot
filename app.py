@@ -16,6 +16,7 @@ import googlemaps
 import numpy as np
 import json
 import os
+from chatbase import Message
 
 app = Flask(__name__)
 

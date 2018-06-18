@@ -119,6 +119,9 @@ def handle_message(event):
             gecode_result = gmaps.reverse_geocode((loc_dis_min[i][1][2], loc_dis_min[i][1][3]), language='zh-TW')
             nearest_loc.append(gecode_result[0]['formatted_address'])
 
+        for i in nearest_loc:
+            print(i)
+
         #滾軸
         carousel_template = CarouselTemplate(
             columns=[

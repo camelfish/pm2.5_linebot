@@ -63,6 +63,7 @@ def handle_message(event):
     nearest_loc = []
 
     user_loc = event.message.text
+    print(user_loc)
     gecode_result = gmaps.geocode(user_loc)
     user_loc_abs = np.array(list(gecode_result[0]['geometry']['location'].values()))
 
@@ -152,7 +153,7 @@ def handle_message(event):
         alt_text = '距離最近的五個測站', 
         template = carousel_template
     )
-    print (profile.display_name )
+    print (profile.display_name)
 
     line_bot_api.reply_message(event.reply_token, template_message)
 
@@ -178,6 +179,7 @@ def handle_location_message(event):
 
     print(event.message.latitude)
     print(event.message.longitude)
+    print(event.message.address)
 
     user_loc_abs = np.array([event.message.latitude, event.message.longitude])
 
@@ -264,6 +266,8 @@ def handle_location_message(event):
     )
     
     line_bot_api.reply_message(event.reply_token, template_message)
+
+    print (profile.display_name)
 
     msg = Message(api_key=chatbase_api_key,
               type="user",

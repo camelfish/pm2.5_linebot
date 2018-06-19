@@ -77,87 +77,85 @@ def handle_message(event):
 
     loc_dis_min = sorted(loc_dis_min.items(), key=lambda e: e[1][1])
 
-    
-    for i in range(5):
-        gecode_result = gmaps.reverse_geocode((loc_dis_min[i][1][2], loc_dis_min[i][1][3]), language='zh-TW')
-        nearest_loc.append(gecode_result[0]['formatted_address'])
+    try:
 
-    for i in nearest_loc:
-        print(i)
+        for i in range(5):
+            gecode_result = gmaps.reverse_geocode((loc_dis_min[i][1][2], loc_dis_min[i][1][3]), language='zh-TW')
+            nearest_loc.append(gecode_result[0]['formatted_address'])
 
-    print(loc_dis_min[0][1][0])
+        print(loc_dis_min[0][1][0])
 
-    #滾軸
-    carousel_template = CarouselTemplate(
-        columns=[
-            CarouselColumn(
-                thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
-                title = nearest_loc[0][3:23],
-                text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
-                actions=[
-                    PostbackTemplateAction(
-                        label='貼心小提醒', 
-                        data=str(loc_dis_min[0][1][0]),
-                    )
-                ]
-            ),
-            CarouselColumn(
-                thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&size=600x300&key='+static_maps_api_key,
-                title = nearest_loc[1][3:23],
-                text = 'pm2.5為'+str(loc_dis_min[1][1][0]),
-                actions=[
-                    PostbackTemplateAction(
-                        label = '貼心小提醒', 
-                        data=str(loc_dis_min[1][1][0]),
-                    )
-                ]
-            ),
-            CarouselColumn(
-                thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&size=600x300&key='+static_maps_api_key,
-                title = nearest_loc[2][3:23],
-                text = 'pm2.5為'+str(loc_dis_min[2][1][0]),
-                actions=[
-                    PostbackTemplateAction(
-                        label = '貼心小提醒', 
-                        data=str(loc_dis_min[2][1][0]),
-                    )
-                ]
-            ),                    
-            CarouselColumn(
-                thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
-                title = nearest_loc[3][3:23],
-                text = 'pm2.5為'+str(loc_dis_min[3][1][0]),
-                actions=[
-                    PostbackTemplateAction(
-                        label = '貼心小提醒', 
-                        data=str(loc_dis_min[3][1][0]),
-                    )
-                ]
-            ),
-            CarouselColumn(
-                thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[4][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
-                title = nearest_loc[4][3:23],
-                text = 'pm2.5為'+str(loc_dis_min[4][1][0]),
-                actions=[
-                    PostbackTemplateAction(
-                        label = '貼心小提醒', 
-                        data=str(loc_dis_min[4][1][0]),
-                    )
-                ]
-            )
-        ]
-        
-    )
+        #滾軸
+        carousel_template = CarouselTemplate(
+            columns=[
+                CarouselColumn(
+                    thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    title = nearest_loc[0][3:23],
+                    text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
+                    actions=[
+                        PostbackTemplateAction(
+                            label='貼心小提醒', 
+                            data=str(loc_dis_min[0][1][0]),
+                        )
+                    ]
+                ),
+                CarouselColumn(
+                    thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    title = nearest_loc[1][3:23],
+                    text = 'pm2.5為'+str(loc_dis_min[1][1][0]),
+                    actions=[
+                        PostbackTemplateAction(
+                            label = '貼心小提醒', 
+                            data=str(loc_dis_min[1][1][0]),
+                        )
+                    ]
+                ),
+                CarouselColumn(
+                    thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    title = nearest_loc[2][3:23],
+                    text = 'pm2.5為'+str(loc_dis_min[2][1][0]),
+                    actions=[
+                        PostbackTemplateAction(
+                            label = '貼心小提醒', 
+                            data=str(loc_dis_min[2][1][0]),
+                        )
+                    ]
+                ),                    
+                CarouselColumn(
+                    thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    title = nearest_loc[3][3:23],
+                    text = 'pm2.5為'+str(loc_dis_min[3][1][0]),
+                    actions=[
+                        PostbackTemplateAction(
+                            label = '貼心小提醒', 
+                            data=str(loc_dis_min[3][1][0]),
+                        )
+                    ]
+                ),
+                CarouselColumn(
+                    thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[4][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
+                    title = nearest_loc[4][3:23],
+                    text = 'pm2.5為'+str(loc_dis_min[4][1][0]),
+                    actions=[
+                        PostbackTemplateAction(
+                            label = '貼心小提醒', 
+                            data=str(loc_dis_min[4][1][0]),
+                        )
+                    ]
+                )
+            ]
+            
+        )
 
-    template_message = TemplateSendMessage(
-        alt_text = '距離最近的五個測站', 
-        template = carousel_template
-    )
-    print (profile.display_name)
+        template_message = TemplateSendMessage(
+            alt_text = '距離最近的五個測站', 
+            template = carousel_template
+        )
+        print (profile.display_name)
 
-    line_bot_api.reply_message(event.reply_token, template_message)
+        line_bot_api.reply_message(event.reply_token, template_message)
 
-    msg = Message(api_key=chatbase_api_key,
+        msg = Message(api_key=chatbase_api_key,
           type="user",
           platform="Line",
           version="1.0",
@@ -166,7 +164,25 @@ def handle_message(event):
           intent="LinebotSearchPostion",  
           not_handled=False,           
           )            
-    resp = msg.send()
+        resp = msg.send()
+
+    except:
+
+        error_mes = '您輸入的地點附近沒有測站。'
+        output_mes = TextSendMessage(text=error_mes)
+
+        line_bot_api.reply_message(event.reply_token, output_mes)
+
+        msg = Message(api_key=chatbase_api_key,
+          type="user",
+          platform="Line",
+          version="1.0",
+          user_id=profile.display_name,
+          message=error_mes,
+          intent="LinebotSearchPostion",  
+          not_handled=True,           
+          )            
+        resp = msg.send()
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location_message(event):

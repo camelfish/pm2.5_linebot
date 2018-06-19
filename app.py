@@ -8,7 +8,7 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, LocationMessage, TemplateSendMessage, PostbackEvent,
-    ButtonsTemplate, CarouselTemplate, PostbackTemplateAction, CarouselColumn, URITemplateAction, MessageTemplateAction
+    ButtonsTemplate, CarouselTemplate, PostbackTemplateAction, CarouselColumn, URITemplateAction, MessageTemplateAction, SourceUser
 )
 
 import requests
@@ -57,6 +57,8 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     
+    profile = line_bot_api.get_profile(event.source.user_id)
+
     loc_dis_min={}
     nearest_loc = []
 
@@ -150,14 +152,15 @@ def handle_message(event):
         alt_text = '距離最近的五個測站', 
         template = carousel_template
     )
-    
+    print (profile.display_name )
+
     line_bot_api.reply_message(event.reply_token, template_message)
 
     msg = Message(api_key=chatbase_api_key,
           type="user",
           platform="Line",
           version="1.0",
-          user_id=event.source.user_id,
+          user_id=profile.display_name,
           message=event.message.text,
           intent="LinebotSearchPostion",  
           not_handled=False,           

@@ -170,6 +170,8 @@ def handle_message(event):
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location_message(event):
 
+    profile = line_bot_api.get_profile(event.source.user_id)
+
     # Geocoding an address
     loc_dis_min={}
     nearest_loc = []
@@ -267,7 +269,7 @@ def handle_location_message(event):
               type="user",
               platform="Line",
               version="1.0",
-              user_id=event.source.user_id,
+              user_id=profile.display_name,
               message=event.message.address,
               intent="LinebotSearchPostion",  
               not_handled=False,           

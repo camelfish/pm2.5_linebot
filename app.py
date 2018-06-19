@@ -102,7 +102,7 @@ def handle_message(event):
                 CarouselColumn(
                     thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&size=600x300&key='+static_maps_api_key,
                     title = nearest_loc[1][3:23],
-                    text = 'pm2.5為'+str(loc_dis_min[1][1][0]),
+                    text = '➤pm2.5為'+str(loc_dis_min[1][1][0])+'\n➤溫度為'+str(loc_dis_min[1][1][4])+'\n➤濕度為'+str(loc_dis_min[1][1][5]),
                     actions=[
                         PostbackTemplateAction(
                             label = '貼心小提醒', 
@@ -113,7 +113,7 @@ def handle_message(event):
                 CarouselColumn(
                     thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&size=600x300&key='+static_maps_api_key,
                     title = nearest_loc[2][3:23],
-                    text = 'pm2.5為'+str(loc_dis_min[2][1][0]),
+                    text = '➤pm2.5為'+str(loc_dis_min[2][1][0])+'\n➤溫度為'+str(loc_dis_min[2][1][4])+'\n➤濕度為'+str(loc_dis_min[2][1][5]),
                     actions=[
                         PostbackTemplateAction(
                             label = '貼心小提醒', 
@@ -124,7 +124,7 @@ def handle_message(event):
                 CarouselColumn(
                     thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
                     title = nearest_loc[3][3:23],
-                    text = 'pm2.5為'+str(loc_dis_min[3][1][0]),
+                    text = '➤pm2.5為'+str(loc_dis_min[3][1][0])+'\n➤溫度為'+str(loc_dis_min[3][1][4])+'\n➤濕度為'+str(loc_dis_min[3][1][5]),
                     actions=[
                         PostbackTemplateAction(
                             label = '貼心小提醒', 
@@ -135,7 +135,7 @@ def handle_message(event):
                 CarouselColumn(
                     thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[4][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
                     title = nearest_loc[4][3:23],
-                    text = 'pm2.5為'+str(loc_dis_min[4][1][0]),
+                    text = '➤pm2.5為'+str(loc_dis_min[4][1][0])+'\n➤溫度為'+str(loc_dis_min[4][1][4])+'\n➤濕度為'+str(loc_dis_min[4][1][5]),
                     actions=[
                         PostbackTemplateAction(
                             label = '貼心小提醒', 
@@ -220,7 +220,7 @@ def handle_location_message(event):
             CarouselColumn(
                 thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
                 title = nearest_loc[0][3:23],
-                text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
+                text = '➤pm2.5為'+str(loc_dis_min[0][1][0])+'\n➤溫度為'+str(loc_dis_min[0][1][4])+'\n➤濕度為'+str(loc_dis_min[0][1][5]),
                 actions=[
                     PostbackTemplateAction(
                         label='貼心小提醒', 
@@ -231,7 +231,7 @@ def handle_location_message(event):
             CarouselColumn(
                 thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[1][1][2])+','+ str(loc_dis_min[1][1][3])+'&size=600x300&key='+static_maps_api_key,
                 title = nearest_loc[1][3:23],
-                text = 'pm2.5為'+str(loc_dis_min[1][1][0]),
+                text = '➤pm2.5為'+str(loc_dis_min[1][1][0])+'\n➤溫度為'+str(loc_dis_min[1][1][4])+'\n➤濕度為'+str(loc_dis_min[1][1][5]),
                 actions=[
                     PostbackTemplateAction(
                         label = '貼心小提醒', 
@@ -242,7 +242,7 @@ def handle_location_message(event):
             CarouselColumn(
                 thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[2][1][2])+','+ str(loc_dis_min[2][1][3])+'&size=600x300&key='+static_maps_api_key,
                 title = nearest_loc[2][3:23],
-                text = 'pm2.5為'+str(loc_dis_min[2][1][0]),
+                text = '➤pm2.5為'+str(loc_dis_min[2][1][0])+'\n➤溫度為'+str(loc_dis_min[2][1][4])+'\n➤濕度為'+str(loc_dis_min[2][1][5]),
                 actions=[
                     PostbackTemplateAction(
                         label = '貼心小提醒', 
@@ -253,7 +253,7 @@ def handle_location_message(event):
             CarouselColumn(
                 thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[3][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
                 title = nearest_loc[3][3:23],
-                text = 'pm2.5為'+str(loc_dis_min[3][1][0]),
+                text = '➤pm2.5為'+str(loc_dis_min[3][1][0])+'\n➤溫度為'+str(loc_dis_min[3][1][4])+'\n➤濕度為'+str(loc_dis_min[3][1][5]),
                 actions=[
                     PostbackTemplateAction(
                         label = '貼心小提醒', 
@@ -264,7 +264,7 @@ def handle_location_message(event):
             CarouselColumn(
                 thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[4][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[4][1][2])+','+ str(loc_dis_min[3][1][3])+'&size=600x300&key='+static_maps_api_key,
                 title = nearest_loc[4][3:23],
-                text = 'pm2.5為'+str(loc_dis_min[4][1][0]),
+                text = '➤pm2.5為'+str(loc_dis_min[4][1][0])+'\n➤溫度為'+str(loc_dis_min[4][1][4])+'\n➤濕度為'+str(loc_dis_min[4][1][5]),
                 actions=[
                     PostbackTemplateAction(
                         label = '貼心小提醒', 

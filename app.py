@@ -75,7 +75,7 @@ def handle_message(event):
 
             #Euclidean Distance between two location
             loc_dis=np.sqrt(np.sum(np.square(user_loc_abs-device_loc_abs)))
-            loc_dis_min[i['device_id']] = [i['s_d0'], loc_dis, i['gps_lat'], i['gps_lon']]
+            loc_dis_min[i['device_id']] = [i['s_d0'], loc_dis, i['gps_lat'], i['gps_lon'], i['s_t0'], i['s_h0']]
 
         loc_dis_min = sorted(loc_dis_min.items(), key=lambda e: e[1][1])
 
@@ -91,7 +91,7 @@ def handle_message(event):
                 CarouselColumn(
                     thumbnail_image_url='https://maps.googleapis.com/maps/api/staticmap?center='+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&zoom=16&markers=color:blue%7Clabel:S%7C'+ str(loc_dis_min[0][1][2])+','+ str(loc_dis_min[0][1][3])+'&size=600x300&key='+static_maps_api_key,
                     title = nearest_loc[0][3:23],
-                    text = 'pm2.5為'+str(loc_dis_min[0][1][0]),
+                    text = 'pm2.5為'+str(loc_dis_min[0][1][0])+'\n溫度為'+str(loc_dis_min[0][1][4])+'\n濕度為'+str(loc_dis_min[0][1][5])
                     actions=[
                         PostbackTemplateAction(
                             label='貼心小提醒', 

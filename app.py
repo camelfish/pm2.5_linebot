@@ -64,20 +64,20 @@ def handle_message(event):
 
     user_loc = event.message.text
     print(user_loc)
-    gecode_result = gmaps.geocode(user_loc)
-    user_loc_abs = np.array(list(gecode_result[0]['geometry']['location'].values()))
-
-    for i in data_pm['feeds']:
-
-        device_loc_abs = np.array([i['gps_lat'],i['gps_lon']])
-
-        #Euclidean Distance between two location
-        loc_dis=np.sqrt(np.sum(np.square(user_loc_abs-device_loc_abs)))
-        loc_dis_min[i['device_id']] = [i['s_d0'], loc_dis, i['gps_lat'], i['gps_lon']]
-
-    loc_dis_min = sorted(loc_dis_min.items(), key=lambda e: e[1][1])
-
+    
     try:
+        gecode_result = gmaps.geocode(user_loc)
+        user_loc_abs = np.array(list(gecode_result[0]['geometry']['location'].values()))
+
+        for i in data_pm['feeds']:
+
+            device_loc_abs = np.array([i['gps_lat'],i['gps_lon']])
+
+            #Euclidean Distance between two location
+            loc_dis=np.sqrt(np.sum(np.square(user_loc_abs-device_loc_abs)))
+            loc_dis_min[i['device_id']] = [i['s_d0'], loc_dis, i['gps_lat'], i['gps_lon']]
+
+        loc_dis_min = sorted(loc_dis_min.items(), key=lambda e: e[1][1])
 
         for i in range(5):
             gecode_result = gmaps.reverse_geocode((loc_dis_min[i][1][2], loc_dis_min[i][1][3]), language='zh-TW')

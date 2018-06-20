@@ -159,7 +159,7 @@ def handle_message(event):
           type="user",
           platform="Line",
           version="1.0",
-          user_id=profile.display_name,
+          user_id=event.source.user_id,
           message=event.message.text,
           intent="LinebotSearchPostion",  
           not_handled=False,           
@@ -171,13 +171,14 @@ def handle_message(event):
         error_mes = '您輸入的地點附近沒有測站。'
         output_mes = TextSendMessage(text=error_mes)
 
+        print (profile.display_name)
         line_bot_api.reply_message(event.reply_token, output_mes)
 
         msg = Message(api_key=chatbase_api_key,
           type="user",
           platform="Line",
           version="1.0",
-          user_id=profile.display_name,
+          user_id=event.source.user_id,
           message=error_mes,
           intent="LinebotSearchPostion",  
           not_handled=True,           
@@ -297,7 +298,7 @@ def handle_location_message(event):
               type="user",
               platform="Line",
               version="1.0",
-              user_id=profile.display_name,
+              user_id=event.source.user_id,
               message=event.message.address,
               intent="LinebotSearchPostion",  
               not_handled=False,           

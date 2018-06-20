@@ -348,6 +348,19 @@ def handle_postback(event):
         event.reply_token,
         output_mes)
 
+    print (profile.display_name)
+
+    msg = Message(api_key=chatbase_api_key,
+              type="user",
+              platform="Line",
+              version="1.0",
+              user_id=event.source.user_id,
+              message="貼心小提醒",
+              intent="PostionAdvice",  
+              not_handled=False,           
+              )            
+    resp = msg.send()
+
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

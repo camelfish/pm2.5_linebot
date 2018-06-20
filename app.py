@@ -308,6 +308,8 @@ def handle_location_message(event):
 @handler.add(PostbackEvent)
 def handle_postback(event):
     
+    profile = line_bot_api.get_profile(event.source.user_id)
+
     #判別空汙等級        
     if float(event.postback.data) <= 11:
         pm_level = '第一等級'

@@ -215,11 +215,6 @@ def handle_location_message(event):
         gecode_result = gmaps.reverse_geocode((loc_dis_min[i][1][2], loc_dis_min[i][1][3]), language='zh-TW')
         nearest_loc.append(gecode_result[0]['formatted_address'])
 
-    for i in range(5):
-        print(loc_dis_min[i][1][0])
-        print(loc_dis_min[i][1][4])
-        print(loc_dis_min[i][1][5])
-
     for i in nearest_loc:
         print(i)
 

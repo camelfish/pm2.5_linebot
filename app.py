@@ -221,6 +221,7 @@ def handle_location_message(event):
 
     for i in nearest_loc:
         print(i)
+        print('87')
 
     #滾軸
     carousel_template = CarouselTemplate(

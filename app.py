@@ -179,7 +179,7 @@ def handle_message(event):
           platform="Line",
           version="1.0",
           user_id=event.source.user_id,
-          message=error_mes,
+          message=event.message.text,
           intent="LinebotSearchPostion",  
           not_handled=True,           
           )            
